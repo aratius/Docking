@@ -149,6 +149,11 @@ void setStatus() {
   char* statusAdd = getOscAddress("status");
   sendOsc(statusAdd, 1); 
   delete[] statusAdd;
+  float vbat = M5.Axp.GetBatVoltage();
+  int percent = (int)((vbat-3.0)/1.2*100);
+  char* batteryAdd = getOscAddress("battery");
+  sendOsc(batteryAdd, percent); 
+  delete[] batteryAdd;
 }
 
 char* getOscAddress(const char* key) {
