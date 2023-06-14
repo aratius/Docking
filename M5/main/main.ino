@@ -113,6 +113,7 @@ void connectWiFi() {
     }
     cnt += 1;
   }
+  isConnected = WiFi.status() == WL_CONNECTED;
 
   M5.Lcd.println("");
   M5.Lcd.println("INFO : Wi-Fi Connected.");
