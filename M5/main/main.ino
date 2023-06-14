@@ -5,7 +5,7 @@
 // --------------------
 // ここを書き換えてください
 // --------------------
-#define DEVICE_NUMBER 1
+#define DEVICE_IDENTITY 1
 
 #define WIDTH = 240
 #define HEIGHT = 135
@@ -13,7 +13,7 @@
 //WiFiルータ Settings
 const char* ssid = "HUMAX-BD2EB";  // ネットワーク名
 const char* pwd = "MjdjMmNxMEgaX";  // パスワード
-IPAddress ip(192, 168, 0, 100+DEVICE_NUMBER);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
+IPAddress ip(192, 168, 0, 100+DEVICE_IDENTITY);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
 const char* host = "192.168.0.12";  // 送信先のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
 const IPAddress gateway(192, 168, 1, 1);  // ゲートウェイ = ネットワークのベース
 const IPAddress subnet(255, 255, 255, 0);  // サブネット = だいたいこの値
@@ -120,6 +120,7 @@ void onWiFiInitialized() {
   M5.Lcd.fillRect(10, 20, 230, 20, BLACK);
   M5.Lcd.setCursor(10, 20);
   M5.Lcd.setTextSize(2);
+  M5.Lcd.print(String(getDeviceNumber()) + " ");
   M5.Lcd.println(ipStr);
   M5.Lcd.setTextSize(1);
   
@@ -170,8 +171,13 @@ void setStatus() {
 }
 
 char* getOscAddress(const char* key) {
-  String address = "/device/" + String(DEVICE_NUMBER % 4) + "/" + key;
+  String address = "/device/" + String(getDeviceNumber()) + "/" + key;
   char *cstr = new char[address.length() + 1];
   strcpy(cstr, address.c_str());
   return cstr;
+}
+
+int getDeviceNumber() {
+  int deviceNumber = DEVICE_IDENTITY % 4;
+  return deviceNumber == 0 ? 4 : deviceNumber;
 }
