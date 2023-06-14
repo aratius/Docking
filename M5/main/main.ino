@@ -164,8 +164,8 @@ void setStatus() {
   delete[] batteryAdd;
   if(percent != batteryPercent) {
     // display
-    M5.Lcd.fillRect(0, 0, 240, 10, BLACK);
-    M5.Lcd.fillRect(0, 0, 240 * percent / 100, 10, GREEN);
+    M5.Lcd.fillRect(0, 0, 240, 5, BLACK);
+    M5.Lcd.fillRect(0, 0, 240 * percent / 100, 5, GREEN);
   }
   batteryPercent = percent;
 }
