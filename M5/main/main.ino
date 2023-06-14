@@ -2,12 +2,15 @@
 #include <M5StickCPlus.h>
 #include <ArduinoOSC.h>
 
-#define DEVICE_NUMBER "1"
+// --------------------
+// ここを書き換えてください
+// --------------------
+#define DEVICE_NUMBER 1
 
 //WiFiルータ Settings
 const char* ssid = "aratamatsumoto";  // ネットワーク名
 const char* pwd = "aratamatsumoto";  // パスワード
-const IPAddress ip(172, 20, 10, 3);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
+IPAddress ip(172, 20, 10, 10+DEVICE_NUMBER);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
 const char* host = "172.20.10.2";  // 送信先のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
 const IPAddress gateway(172, 20, 10, 1);  // ゲートウェイ = ネットワークのベース
 const IPAddress subnet(255, 255, 255, 240);  // サブネット = だいたいこの値
