@@ -5,19 +5,19 @@
 // --------------------
 // ここを書き換えてください
 // --------------------
-#define DEVICE_IDENTITY 1
+#define DEVICE_IDENTITY 2
 
 #define WIDTH = 240
 #define HEIGHT = 135
 
 //WiFiルータ Settings
-const char* ssid = "HUMAX-BD2EB";  // ネットワーク名
-const char* pwd = "MjdjMmNxMEgaX";  // パスワード
-IPAddress ip(192, 168, 0, 100+DEVICE_IDENTITY);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
-const char* host = "192.168.0.12";  // 送信先のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
+const char* ssid = "synology_2.4G";  // ネットワーク名
+const char* pwd = "synology";  // パスワード
+IPAddress ip(192, 168, 1, 100+DEVICE_IDENTITY);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
+const char* host = "192.168.1.51";  // 送信先のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
 const IPAddress gateway(192, 168, 1, 1);  // ゲートウェイ = ネットワークのベース
 const IPAddress subnet(255, 255, 255, 0);  // サブネット = だいたいこの値
-const int portIncomming = 10001;  // サーバ（受信）ポート
+const int portIncomming = 10000+DEVICE_IDENTITY;  // サーバ（受信）ポート
 const int portOutgoing = 10000;
 bool isConnected = false;
 
@@ -132,6 +132,9 @@ void onWiFiInitialized() {
   char* ipAdd = getOscAddress("ip");
   sendOsc(ipAdd, ipStr);
   delete[] ipAdd;
+  char* portAdd = getOscAddress("port");
+  sendOsc(portAdd, portIncomming);
+  delete[] portAdd;
 }
 
 void onOscReceivedThreshold(OscMessage& m) {
