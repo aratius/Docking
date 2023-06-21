@@ -15,6 +15,13 @@ public class Device
     public Device(int n) { number = n; }
 }
 
+[System.Serializable]
+public class Host
+{
+    public string ip;
+    public Host(string _ip) { ip = _ip; }
+}
+
 public class App : MonoBehaviour
 {
 
@@ -30,6 +37,8 @@ public class App : MonoBehaviour
     TextMeshProUGUI m_OutPortText;
     [SerializeField]
     TextMeshProUGUI m_InPortText;
+    [SerializeField]
+    TextMeshProUGUI m_HostIpText;
 
     OscServer m_OscServer;
     OscClient m_OscClient;
@@ -72,16 +81,13 @@ public class App : MonoBehaviour
             index++;
         }
 
-        string host = "192.168.0.12";  // TODO: Jsonで指定
+        MyJsonReader<Host> hostInfo = MyJsonReader<Host>.GetInstance("host.json");
+        string host = hostInfo.exists ? hostInfo.data.ip : "127.0.0.1";
         m_OscClient = new OscClient(host, m_OutPort);
+        m_HostIpText.text = $"HOST IP : {host}";
 
         MyJsonReader<Device> deviceInfo = MyJsonReader<Device>.GetInstance("device.json");
-        if(deviceInfo.exists)
-        {
-            m_DeviceNumber = deviceInfo.data.number;
-            m_DeviceNameText.text = $"iPod-{m_DeviceNumber}";
-            Select(m_DeviceNumber-1);
-        }
+        if(deviceInfo.exists) Init(deviceInfo.data.number);
         m_OutPortText.text = $"PORT(OUT) : {m_OutPort}";
         m_IpText.text =  $"IP : {App.GetIP()}";
     }
@@ -129,8 +135,7 @@ public class App : MonoBehaviour
         {
             Image img = m_Buttons[i].gameObject.GetComponent<Image>();
             Color c = img.color;
-            if(i == index) c.a = 1f;
-            else c.a = .5f;
+            c.a = i == index ? 1f : .5f;
             img.color = c;
         }
     }
@@ -140,7 +145,7 @@ public class App : MonoBehaviour
         await UniTask.WaitForFixedUpdate();
         int val = data.GetElementAsInt(0);
         Debug.Log(val);
-        m_Sinus.gain = val == 1 ? .05f : 0f;
+        m_Sinus.gain = val == 1 ? .2f : 0f;
     }
 
     async void OnReceiveHand(string address, OscDataHandle data)
