@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,8 @@ public class App : MonoBehaviour
     TextMeshProUGUI m_InPortText;
     [SerializeField]
     TextMeshProUGUI m_HostIpText;
+    [SerializeField]
+    Material m_Material;
 
     OscServer m_OscServer;
     OscClient m_OscClient;
@@ -90,6 +93,8 @@ public class App : MonoBehaviour
         if(deviceInfo.exists) Init(deviceInfo.data.number);
         m_OutPortText.text = $"PORT(OUT) : {m_OutPort}";
         m_IpText.text =  $"IP : {App.GetIP()}";
+
+        m_Material.SetVector("_Resolution", new Vector2(Screen.width, Screen.height));
     }
 
     // Update is called once per frame
@@ -99,6 +104,9 @@ public class App : MonoBehaviour
         {
             if(m_DeviceNumber != 0) m_OscClient.Send($"/ipod/{m_DeviceNumber}/status", 1);
         }
+
+        float t = (float)(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() % (3600 * 1000)) / 1000f;
+        m_Material.SetFloat("_UtcTime", t);
     }
 
     void OnClickButton(int index)
@@ -127,6 +135,8 @@ public class App : MonoBehaviour
 
         MyJsonWriter.Write("device.json", JsonUtility.ToJson(new Device(m_DeviceNumber)));
         Select(m_DeviceNumber-1);
+
+        m_Material.SetFloat("_Index", m_DeviceNumber);
     }
 
     void Select(int index)
@@ -135,7 +145,7 @@ public class App : MonoBehaviour
         {
             Image img = m_Buttons[i].gameObject.GetComponent<Image>();
             Color c = img.color;
-            c.a = i == index ? 1f : .5f;
+            c.a = i == index ? 1f : .2f;
             img.color = c;
         }
     }
