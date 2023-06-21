@@ -81,13 +81,12 @@ Shader "Unlit/Bg"
                 }
 
                 float v1 = SimplexNoise(fixed3(r, 0));
-                v1 = (v1 + 1) * .5;
+                v1 = clamp((v1 + 1) * .5, 0, 1);
 
-                int index;
                 fixed3 _Colors[] = {_Color1, _Color2, _Color3};
 
                 v1 *= 2;
-                index = int(v1);
+                int index = floor(v1);
                 color.rgb *= lerp(_Colors[index], _Colors[index + 1], frac(v1));
 
                 return color;
