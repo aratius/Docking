@@ -52,7 +52,7 @@ void setup() {
   M5.begin();
   M5.IMU.Init();
   M5.Lcd.setRotation(3);
-  setCpuFrequencyMhz(80);  // 無線通信可能な最低値
+  setCpuFrequencyMhz(160);  // 無線通信可能な最低値=80
   setEcoMode(ecoMode);
   M5.Lcd.drawLine(0, 100, 240, 100, WHITE);
   connectWiFi();

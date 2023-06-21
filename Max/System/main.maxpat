@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -61.0, 1852.0, 959.0 ],
+		"rect" : [ 1474.0, -61.0, 1452.0, 959.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -161,8 +161,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 1365.0, 585.0, 51.0, 22.0 ],
-					"text" : "s sound"
+					"patching_rect" : [ 1365.0, 585.0, 58.0, 22.0 ],
+					"text" : "s~ sound"
 				}
 
 			}
@@ -1430,7 +1430,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 400.0, 50.0, 22.0 ],
-									"text" : "1"
+									"text" : "0"
 								}
 
 							}
@@ -2366,7 +2366,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 400.0, 50.0, 22.0 ],
-									"text" : "1"
+									"text" : "0"
 								}
 
 							}
@@ -9345,6 +9345,7 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"comment" : "",
@@ -11040,7 +11041,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 180.0, 195.0, 50.0, 22.0 ],
-									"text" : "2984"
+									"text" : "500"
 								}
 
 							}
@@ -11431,7 +11432,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 105.0, 400.0, 50.0, 22.0 ],
-									"text" : "1"
+									"text" : "0"
 								}
 
 							}
@@ -15224,11 +15225,30 @@
  ],
 		"parameters" : 		{
 			"obj-10" : [ "live.gain~", "live.gain~", 0 ],
+			"obj-276.1::obj-26" : [ "live.gain~[7]", "live.gain~", 0 ],
+			"obj-276.2::obj-26" : [ "live.gain~[2]", "live.gain~", 0 ],
+			"obj-276.3::obj-26" : [ "live.gain~[3]", "live.gain~", 0 ],
+			"obj-276.4::obj-26" : [ "live.gain~[4]", "live.gain~", 0 ],
 			"parameterbanks" : 			{
 				"0" : 				{
 					"index" : 0,
 					"name" : "",
 					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+				}
+
+			}
+,
+			"parameter_overrides" : 			{
+				"obj-276.1::obj-26" : 				{
+					"parameter_longname" : "live.gain~[7]"
+				}
+,
+				"obj-276.3::obj-26" : 				{
+					"parameter_longname" : "live.gain~[3]"
+				}
+,
+				"obj-276.4::obj-26" : 				{
+					"parameter_longname" : "live.gain~[4]"
 				}
 
 			}
