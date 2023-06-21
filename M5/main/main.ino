@@ -11,17 +11,31 @@
 #define HEIGHT = 135
 
 //WiFiルータ Settings
-const char* ssid = "synology_2.4G";  // ネットワーク名
-const char* pwd = "synology";  // パスワード
-IPAddress ip(192, 168, 1, 100+DEVICE_IDENTITY);  // 自分のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
-const char* host = "192.168.1.51";  // 送信先のIPを決定する（pingコマンドなどで事前にIPが空いているか確認するのが望ましい） 
-const IPAddress gateway(192, 168, 1, 1);  // ゲートウェイ = ネットワークのベース
-const IPAddress subnet(255, 255, 255, 0);  // サブネット = だいたいこの値
-const int portIncomming = 10000+DEVICE_IDENTITY;  // サーバ（受信）ポート
+// --------------------
+// synology
+// --------------------
+// const char* ssid = "synology_2.4G";
+// const char* pwd = "synology";
+// const char* host = "192.168.1.51";
+// const IPAddress gateway(192, 168, 1, 1);
+// const IPAddress subnet(255, 255, 255, 0);
+// IPAddress ip(192, 168, 1, 100+DEVICE_IDENTITY);
+
+// --------------------
+// HUMAX
+// --------------------
+const char* ssid = "HUMAX-BD2EB";
+const char* pwd = "MjdjMmNxMEgaX";
+const char* host = "192.168.0.12";
+const IPAddress gateway(192, 168, 0, 1);
+const IPAddress subnet(255, 255, 255, 0);
+IPAddress ip(192, 168, 0, 100+DEVICE_IDENTITY);
+
+const int portIncomming = 10000+DEVICE_IDENTITY;
 const int portOutgoing = 10000;
 bool isConnected = false;
 
-#define SAMPLE_PERIOD 10    // サンプリング間隔(ミリ秒)
+#define SAMPLE_PERIOD 17    // サンプリング間隔(ミリ秒) 17=round(60FPS)
 float ax, ay, az;  // 加速度データを読み出す変数
 float threshold = 3;
 unsigned long interval = 200;
@@ -31,17 +45,17 @@ unsigned long wait_until = 0;
 
 char ipStr[16];
 int batteryPercent = 100;
+bool ecoMode = false;
 
 void setup() {
   Serial.begin(115200);
   M5.begin();
   M5.IMU.Init();
   M5.Lcd.setRotation(3);
-
+  setCpuFrequencyMhz(80);  // 無線通信可能な最低値
+  setEcoMode(ecoMode);
   M5.Lcd.drawLine(0, 100, 240, 100, WHITE);
-
   connectWiFi();
-  
   delay(1000);
 }
 
@@ -76,6 +90,7 @@ void loop(){
   }
 
   if(M5.BtnB.wasPressed()) connectWiFi();
+  if(M5.BtnA.wasPressed()) setEcoMode(!ecoMode);
   
   lastTime = t;
   delay(SAMPLE_PERIOD);
@@ -174,7 +189,7 @@ void setStatus() {
 }
 
 char* getOscAddress(const char* key) {
-  String address = "/device/" + String(getDeviceNumber()) + "/" + key;
+  String address = "/m5/" + String(getDeviceNumber()) + "/" + key;
   char *cstr = new char[address.length() + 1];
   strcpy(cstr, address.c_str());
   return cstr;
@@ -183,4 +198,9 @@ char* getOscAddress(const char* key) {
 int getDeviceNumber() {
   int deviceNumber = DEVICE_IDENTITY % 4;
   return deviceNumber == 0 ? 4 : deviceNumber;
+}
+
+void setEcoMode(bool isOn) {
+  ecoMode = isOn;
+  M5.Axp.ScreenBreath(ecoMode ? 7 : 12);
 }

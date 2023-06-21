@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 87.0, 892.0, 929.0 ],
+		"rect" : [ 874.0, 87.0, 772.0, 929.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -10189,7 +10189,7 @@
 					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 799.0, 227.5, 297.0, 22.0 ],
 					"text" : "mc.gen~ @title wavetable1D_sinc_mipmap @chans 6",
-					"wrapper_uniquekey" : "u659000574"
+					"wrapper_uniquekey" : "u660006499"
 				}
 
 			}
@@ -10365,7 +10365,6 @@
 			}
 , 			{
 				"box" : 				{
-					"displaychan" : 3,
 					"fontface" : 0,
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -11033,7 +11032,7 @@
 					"outlettype" : [ "multichannelsignal" ],
 					"patching_rect" : [ 410.0, 38.5, 139.0, 22.0 ],
 					"text" : "mc.gen~ mod @chans 8",
-					"wrapper_uniquekey" : "u553000614"
+					"wrapper_uniquekey" : "u679006561"
 				}
 
 			}
@@ -11230,27 +11229,27 @@
 					"restore" : 					{
 						"clock_active" : [ 1 ],
 						"energy_scale" : [ 2, 0, 1.0, 4, 0, 1.0, 7, 0, 1.0, 8, 0, 1.0, 10, 0, 1.0 ],
-						"number" : [ 12 ],
-						"number[10]" : [ 0.492423782709451 ],
-						"number[11]" : [ 0.285079800681132 ],
-						"number[12]" : [ 43 ],
-						"number[13]" : [ 55 ],
+						"number" : [ 0 ],
+						"number[10]" : [ 0.21763963238709 ],
+						"number[11]" : [ 0.67126135136976 ],
+						"number[12]" : [ 65 ],
+						"number[13]" : [ 91 ],
 						"number[14]" : [ 67 ],
-						"number[15]" : [ 98 ],
+						"number[15]" : [ 88 ],
 						"number[16]" : [ 10.0 ],
-						"number[17]" : [ 0.8 ],
+						"number[17]" : [ 0.92 ],
 						"number[18]" : [ 0.14 ],
 						"number[19]" : [ 0.2 ],
-						"number[1]" : [ 53 ],
-						"number[20]" : [ 587.329537856931552 ],
+						"number[1]" : [ 41 ],
+						"number[20]" : [ 466.163759913134982 ],
 						"number[2]" : [ 5.6 ],
 						"number[3]" : [ 0.4 ],
 						"number[4]" : [ 6.0 ],
-						"number[5]" : [ 0.5 ],
+						"number[5]" : [ 0.6 ],
 						"number[6]" : [ 0.81 ],
 						"number[7]" : [ 0.04 ],
-						"number[8]" : [ 0.216896716104727 ],
-						"number[9]" : [ 0.56408244362995 ],
+						"number[8]" : [ 0.633007650337514 ],
+						"number[9]" : [ 0.286778670512025 ],
 						"tempo" : [ 70 ]
 					}
 ,
