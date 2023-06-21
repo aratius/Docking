@@ -87,12 +87,15 @@ public class App : MonoBehaviour
         MyJsonReader<Host> hostInfo = MyJsonReader<Host>.GetInstance("host.json");
         string host = hostInfo.exists ? hostInfo.data.ip : "127.0.0.1";
         m_OscClient = new OscClient(host, m_OutPort);
-        m_HostIpText.text = $"HOST IP : {host}";
+        m_HostIpText.text = $"{host}";
+        m_HostIpText.color = Color.white;
 
         MyJsonReader<Device> deviceInfo = MyJsonReader<Device>.GetInstance("device.json");
         if(deviceInfo.exists) Init(deviceInfo.data.number);
-        m_OutPortText.text = $"PORT(OUT) : {m_OutPort}";
-        m_IpText.text =  $"IP : {App.GetIP()}";
+        m_OutPortText.text = $"{m_OutPort}";
+        m_OutPortText.color = Color.white;
+        m_IpText.text =  $"{App.GetIP()}";
+        m_IpText.color = Color.white;
 
         m_Material.SetVector("_Resolution", new Vector2(Screen.width, Screen.height));
     }
@@ -127,8 +130,10 @@ public class App : MonoBehaviour
         m_OscServer = new OscServer(m_InPort);
         m_OscServer.MessageDispatcher.AddCallback("/sit", OnReceiveSit);
         m_OscServer.MessageDispatcher.AddCallback("/hand", OnReceiveHand);
-        m_InPortText.text = $"PORT(IN) : {m_InPort}";
+        m_InPortText.text = $"{m_InPort}";
+        m_InPortText.color = Color.white;
         m_DeviceNameText.text = $"iPod-{m_DeviceNumber}";
+        m_DeviceNameText.color = new Color(100f/255f, 200f/255f, 40f/255f, 1);
 
         m_OscClient.Send($"/ipod/{m_DeviceNumber}/ip", App.GetIP());
         m_OscClient.Send($"/ipod/{m_DeviceNumber}/port", m_InPort);
