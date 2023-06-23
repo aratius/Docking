@@ -5,7 +5,7 @@
 // --------------------
 // ここを書き換えてください
 // --------------------
-#define DEVICE_IDENTITY 2
+#define DEVICE_IDENTITY 4
 
 #define WIDTH = 240
 #define HEIGHT = 135
@@ -14,22 +14,22 @@
 // --------------------
 // synology
 // --------------------
-// const char* ssid = "synology_2.4G";
-// const char* pwd = "synology";
-// const char* host = "192.168.1.51";
-// const IPAddress gateway(192, 168, 1, 1);
-// const IPAddress subnet(255, 255, 255, 0);
-// IPAddress ip(192, 168, 1, 100+DEVICE_IDENTITY);
+const char* ssid = "synology_2.4G";
+const char* pwd = "synology";
+const char* host = "192.168.1.51";
+const IPAddress gateway(192, 168, 1, 1);
+const IPAddress subnet(255, 255, 255, 0);
+IPAddress ip(192, 168, 1, 100+DEVICE_IDENTITY);
 
 // --------------------
 // HUMAX
 // --------------------
-const char* ssid = "HUMAX-BD2EB";
-const char* pwd = "MjdjMmNxMEgaX";
-const char* host = "192.168.0.12";
-const IPAddress gateway(192, 168, 0, 1);
-const IPAddress subnet(255, 255, 255, 0);
-IPAddress ip(192, 168, 0, 100+DEVICE_IDENTITY);
+// const char* ssid = "HUMAX-BD2EB";
+// const char* pwd = "MjdjMmNxMEgaX";
+// const char* host = "192.168.0.12";
+// const IPAddress gateway(192, 168, 0, 1);
+// const IPAddress subnet(255, 255, 255, 0);
+// IPAddress ip(192, 168, 0, 100+DEVICE_IDENTITY);
 
 const int portIncomming = 10000+DEVICE_IDENTITY;
 const int portOutgoing = 10000;
